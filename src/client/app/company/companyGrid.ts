@@ -1,0 +1,19 @@
+export interface CompanyGrid
+{
+    country_id:string;
+    country_name:string;
+    state_id:string;
+    state_name:string;
+    city_id:string;
+    city_name:string;
+    company_id:string;
+    company_name:string;
+    company_emailid:string;
+    company_address:string;
+    company_phonenos:string;
+    company_landline:string;
+    company_regno:string;
+    createdate:string;
+    modifieddate:string;
+    status:string;
+}

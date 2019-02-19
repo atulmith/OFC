@@ -1,0 +1,102 @@
+<p-growl [value]="msgs"></p-growl>
+<h1>Company</h1><br/>
+<form [formGroup]="userform">
+    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px;width:80%;">
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><input pInputText type='text' [(ngModel)]='company.company_name' formControlName='company_name' /> <label>Name</label></span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['company_name'].valid&&userform.controls['company_name'].touched">Name Required</div>
+            </div>
+        </div>
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><input pInputText type='text' [(ngModel)]='company.company_emailid' formControlName='company_emailid' /> <label>Email </label></span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['company_emailid'].valid&&userform.controls['company_emailid'].touched">Email Required</div>
+            </div>
+        </div>
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><input pInputText type='text' [(ngModel)]='company.company_address' formControlName='company_address' /> <label>Address</label></span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['company_address'].valid&&userform.controls['company_address'].touched">Address Required</div>
+            </div>
+        </div>
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><input pInputText type='text' [(ngModel)]='company.company_phonenos' formControlName='company_phonenos' /> <label>Phone nos.</label></span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['company_phonenos'].valid&&userform.controls['company_phonenos'].touched">Phone nos. Required</div>
+            </div>
+        </div>
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><input pInputText type='text' [(ngModel)]='company.company_landline' formControlName='company_landline' /> <label>Landline nos.</label></span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['company_landline'].valid&&userform.controls['company_landline'].touched">Landline nos. Required</div>
+            </div>
+        </div>
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><input pInputText type='text' [(ngModel)]='company.company_regno' formControlName='company_regno' /> <label>Reg No.</label></span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['company_regno'].valid&&userform.controls['company_regno'].touched">Reg No. Required</div>
+            </div>
+        </div>
+
+         <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><p-dropdown [options]="drpCountryId" [(ngModel)]="ngModelcountryId" formControlName="country_id"  (onChange)="populateStates($event)" ></p-dropdown> </span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['country_id'].valid&&userform.controls['country_id'].touched">country Required</div>
+            </div>
+        </div>
+
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><p-dropdown [options]="drpStateId" [(ngModel)]="ngModelStateId" formControlName="state_id" (onChange)="populateCity($event)" ></p-dropdown> </span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['state_id'].valid&&userform.controls['state_id'].touched">State Required</div>
+            </div>
+        </div>
+
+      <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><p-dropdown [options]="drpCityId" [(ngModel)]="company.city_id" formControlName="city_id" ></p-dropdown> </span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['city_id'].valid&&userform.controls['city_id'].touched">City Required</div>
+            </div>
+        </div>
+        <div class="ui-grid-row" style="width:100%;">
+            <div class="ui-g form-group" style="width:80%;">
+                <div class="ui-g-12 ui-md-4" style="width:100%;float:left;">
+                    <div style="width:50%"><button pButton (click)="onSubmit()" label="Submit" [disabled]="!userform.valid"></button><br/></div>
+                    <div style="width:50%;float:right;"><button pButton (click)="clear()" label="Clear"></button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<p-dataTable [value]="companyGrid" selectionMode="single" [rows]="10" [paginator]="true" (onRowSelect)="oncompanygridRowSelected($event)"
+    [(selection)]="selectedcompanygridRow">
+    <p-column field="country_name" [filter]="true" filterPlaceholder="Country" header="Country"></p-column>
+    <p-column field="state_name" [filter]="true" filterPlaceholder="State" header="State"></p-column>
+    <p-column field="city_name" [filter]="true" filterPlaceholder="City" header="City"></p-column>
+    <p-column field="company_name" [filter]="true" filterPlaceholder="Name" header="Name"></p-column>
+    <p-column field="company_emailid" [filter]="true" filterPlaceholder="Email" header="Email"></p-column>
+    <p-column field="company_address" [filter]="true" filterPlaceholder="Address" header="Address"></p-column>
+    <p-column field="company_phonenos" [filter]="true" filterPlaceholder="Phone Nos" header="Phone Nos"></p-column>
+    <p-column field="company_landline" [filter]="true" filterPlaceholder="Landline" header="Landline"></p-column>
+    <p-column field="company_regno" [filter]="true" filterPlaceholder="Reg No" header="Reg No"></p-column>
+   
+</p-dataTable>

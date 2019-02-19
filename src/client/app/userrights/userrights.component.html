@@ -1,0 +1,40 @@
+<!--<div class="ui-g">-->
+<p-growl [value]="msgs"></p-growl>
+<h1>User Rights</h1><br/>
+
+     <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><p-dropdown [options]="drpMemberId" [(ngModel)]="memberId" (onChange)="getMember($event)"></p-dropdown> </span></div>
+            </div>
+            
+        </div>
+    <!--<p-panel header="Validate">-->
+    <div class="ui-grid ui-grid-responsive ui-grid-pad">
+        <div *ngFor="let item of userrightsForm" class="ui-grid-row">
+            <div class="ui-grid-col-12">
+                <div class="ui-grid-col-4">
+                    <h3>{{item.screenname}} </h3>
+                </div>
+                <div class="ui-grid-col-8">
+                    <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="item.authentication" ></p-inputSwitch>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="ui-grid-row" style="width:100%;">
+        <div class="ui-g form-group" style="width:80%;">
+            <div class="ui-g-12 ui-md-4" style="width:100%;float:left;">
+                <div style="width:50%">
+                    <button pButton (click)="onSubmit()" label="Submit"></button><br/>
+                </div>
+                <!--[disabled]="!userform.valid"-->
+                <div style="width:50%;float:right;">
+                    <button pButton (click)="clear()" label="Clear"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+ 

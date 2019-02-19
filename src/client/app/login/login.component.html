@@ -1,0 +1,27 @@
+
+    <div class="ui-g">
+        <div class="ui-g-12">
+            
+        </div>
+        <div class="ui-g-12">
+            <span class="md-inputfield">
+                <input type="text" pInputText autocomplete="off" [(ngModel)]="username">
+                <label>Username</label>
+            </span>
+        </div>
+        <div class="ui-g-12">
+            <span class="md-inputfield">
+                <input type="password" pInputText autocomplete="off" [(ngModel)]="password">
+                <label>Password</label>
+            </span>
+        </div>
+        <div class="ui-g-12">
+            <!--<button type="button" pButton label="Sign In" icon="ui-icon-person"></button>-->
+            <button pButton type="button" (click)="adminlogin()" label="login" ></button>
+            <button type="button" pButton label="Forgot Password" icon="ui-icon-help" class="secondary"></button>
+
+            <button type="button" pButton (click)="adminlogout()" label="Log Out" icon="ui-icon-help" class="secondary"></button>
+            
+        </div>
+    </div>
+<!--</div>-->

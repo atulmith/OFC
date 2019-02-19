@@ -1,0 +1,35 @@
+<p-growl [value]="msgs"></p-growl>
+<h1>Security Questions</h1><br/>
+<form [formGroup]="userform">
+    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px;width:80%;">
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><input pInputText type='text' [(ngModel)]='securityquestion.securityquest_name' formControlName='securityquest_name' /> <label>Security Question Name</label></span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['securityquest_name'].valid&&userform.controls['securityquest_name'].touched">Security Question Required</div>
+            </div>
+        </div>
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><input pInputText type='text' [(ngModel)]='securityquestion.securityquest_alias' formControlName='securityquest_alias' /> <label>Security Question Alias Name</label></span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['securityquest_alias'].valid&&userform.controls['securityquest_alias'].touched">Security Question Alias Name Required</div>
+            </div>
+        </div>
+        <div class="ui-grid-row" style="width:100%;">
+            <div class="ui-g form-group" style="width:80%;">
+                <div class="ui-g-12 ui-md-4" style="width:100%;float:left;">
+                    <div style="width:50%"><button pButton (click)="onSubmit()" label="Submit" [disabled]="!userform.valid"></button><br/></div>
+                    <div style="width:50%;float:right;"><button pButton (click)="clear()" label="Clear"></button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<p-dataTable [value]="securityquestions" selectionMode="single" [rows]="10" [paginator]="true" (onRowSelect)="onRowSelect($event)"
+    [(selection)]="selectedSecurityquestionsRow">
+    <p-column field="securityquest_name" [filter]="true" filterPlaceholder="Name" header="Name"></p-column>
+    <p-column field="securityquest_alias" [filter]="true" filterPlaceholder="Alias Name" header="Alias Name"></p-column>
+</p-dataTable>

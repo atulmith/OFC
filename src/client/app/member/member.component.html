@@ -1,0 +1,89 @@
+
+
+
+<!--<div class="ui-g">-->
+<p-growl [value]="msgs"></p-growl>
+<h1>Create members</h1><br/>
+<form [formGroup]="userform">
+    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px;width:80%;">
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><input pInputText type='text' [(ngModel)]='member.member_name' formControlName='member_name' /> <label>Member Name</label></span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['member_name'].valid&&userform.controls['member_name'].touched">Member Name Required</div>
+            </div>
+        </div>
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><p-dropdown [options]="drpmembertype" [(ngModel)]="member.member_type" formControlName="drpmembertype"></p-dropdown> </span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['drpmembertype'].valid&&userform.controls['drpmembertype'].touched">Member Type Required</div>
+            </div>
+        </div>
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><input pInputText type='text' [(ngModel)]='member.member_contactnos' formControlName='member_contactnos' /> <label>Contact Nos.</label></span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['member_contactnos'].valid&&userform.controls['member_contactnos'].touched">Contact Nos. Required</div>
+            </div>
+        </div>
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><input pInputText type='text' [(ngModel)]='member.member_emailid' formControlName='member_emailid' /> <label>Email</label></span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['member_emailid'].valid&&userform.controls['member_emailid'].touched">Email Required</div>
+            </div>
+        </div>
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><textarea pInputTextarea [(ngModel)]="member.member_address" autoResize="autoResize" formControlName='member_address'></textarea>  </span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['member_address'].valid&&userform.controls['member_address'].touched">Address Required</div>
+            </div>
+        </div>
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><input pInputText type='text' [(ngModel)]='member.password' formControlName='password' /> <label>Password</label></span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['password'].valid&&userform.controls['password'].touched">Password Required</div>
+            </div>
+        </div>
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><input pInputText type='text' [(ngModel)]='member.username' formControlName='username' /> <label>User Name</label></span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['username'].valid&&userform.controls['username'].touched">User Name Required</div>
+            </div>
+        </div>
+        <div class="ui-grid-row" style="width:100%;">
+            <div class="ui-g form-group" style="width:80%;">
+                <div class="ui-g-12 ui-md-4" style="width:100%;float:left;">
+                    <div style="width:50%"><button pButton (click)="onSubmit()" label="Submit"></button><br/></div>
+                    <div style="width:50%;float:right;"><button pButton (click)="clear()" label="Clear"></button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>        <!--</div>
+    </div>
+</div>-->
+
+<p-dataTable [value]="members" selectionMode="single" [rows]="10" [paginator]="true" (onRowSelect)="onRowSelect($event)" [(selection)]="selectedRow">
+    <p-column field="member_name" [filter]="true" filterPlaceholder="Search Name"  header="Name"></p-column>
+    <p-column field="username" [filter]="true" filterPlaceholder="Search Username" header="State"></p-column>
+    <p-column field="member_type" [filter]="true" filterPlaceholder="Search Mmeber Type" header="Start Date"></p-column>
+    <p-column field="member_emailid" [filter]="true" filterPlaceholder="Search Email ID" header="End Date"></p-column>
+    
+</p-dataTable>
+
+
+
+
+     

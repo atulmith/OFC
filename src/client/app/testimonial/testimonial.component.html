@@ -1,0 +1,38 @@
+<p-growl [value]="msgs"></p-growl>
+<h1>Testimonial</h1><br/>
+<form [formGroup]="userform">
+    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px;width:80%;">
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><input pInputText type='text' [(ngModel)]='testimonial.testimonial_name' formControlName='testimonial_name' /> <label>Testimonial Person name</label></span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['testimonial_name'].valid&&userform.controls['testimonial_name'].touched">Testimonial Person Name Required</div>
+            </div>
+        </div>
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><input pInputText type='text' [(ngModel)]='testimonial.testimonial_description' formControlName='testimonial_description' /> <label>Testimonial Descrpiption</label></span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['testimonial_description'].valid&&userform.controls['testimonial_description'].touched">Testimonial Descrpiption Required</div>
+            </div>
+        </div>
+        <div class="ui-grid-row" style="width:100%;">
+            <div class="ui-g form-group" style="width:80%;">
+                <div class="ui-g-12 ui-md-4" style="width:100%;float:left;">
+                    <div style="width:50%"><button pButton (click)="onSubmit()" label="Submit" [disabled]="!userform.valid"></button><br/></div>
+                    <div style="width:50%;float:right;"><button pButton (click)="clear()" label="Clear"></button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+<p-dataTable [value]="testimonialgrid" selectionMode="single" [rows]="10" [paginator]="true" (onRowSelect)="onRowSelect($event)"
+    [(selection)]="selectedTestimonialsRow">
+    <p-column field="testimonial_name" [filter]="true" filterPlaceholder="Name" header="Name"></p-column>
+    <p-column field="testimonial_description" [filter]="true" filterPlaceholder="Description" header="Description"></p-column>
+ </p-dataTable>

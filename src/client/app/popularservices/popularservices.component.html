@@ -1,0 +1,78 @@
+<p-growl [value]="msgs"></p-growl>
+    <h1>Create projects</h1><br/>
+    <form [formGroup]="userform" >
+        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px;width:80%;">
+            <div class='ui-grid-row' style='width:100%;'>
+                <div class='ui-g form-group' style='width:80%;'>
+                    <div class='ui-g-12 ui-md-4' style='width:100%;'>
+                        <span class='md-inputfield'>
+                            <p-spinner [min]="0" [step]="1" [(ngModel)]='popularservice.popularservice_srno' formControlName='popularservice_srno' ></p-spinner> 
+                            <label>Popular Search name</label>
+                        </span>
+                    </div>
+                </div>
+                <div class="ui-grid-col-4">   
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['popularservice_srno'].valid&&userform.controls['popularservice_srno'].touched">Popular Search  Required</div>
+                </div>
+                </div>
+
+                <div class='ui-grid-row' style='width:100%;'>
+                    <div class='ui-g form-group' style='width:80%;'>
+                        <div class='ui-g-12 ui-md-4' style='width:100%;'>
+                            <span class='md-inputfield'><p-dropdown [options]="drpMaincatId" [(ngModel)]="popularservice.maincat_id" formControlName="maincat_id" ></p-dropdown> 
+                            </span>
+                        </div>
+                </div>
+                <div class="ui-grid-col-4">
+                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['maincat_id'].valid&&userform.controls['maincat_id'].touched">Main Category Required</div>
+                </div>
+                
+                </div>
+
+                <div class='ui-grid-row' style='width:100%;'>
+                    <div class='ui-g form-group' style='width:80%;'>
+                    <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><input pInputText type='text' [(ngModel)]='popularservice.popularservice_title' formControlName='popularservice_title' /> <label>Popular Service Title</label></span></div>
+                    </div>
+                    <div class="ui-grid-col-4">
+                    <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['popularservice_title'].valid&&userform.controls['popularservice_title'].touched">Popular Service Title Required</div>
+                    </div>
+                </div>
+
+                
+                <div class="ui-grid-row" style="width:100%;">
+                    <div class="ui-g form-group" style="width:80%;">
+                        <div class="ui-g-12 ui-md-4" style="width:100%;">
+
+                            <p-fileUpload name="files" url="{{mybaseurl}}fileupload/multiplefiles"  (onUpload)="onUpload($event)">
+                            <template pTemplate type="content">
+                            <ul *ngIf="uploadedFiles.length">
+                                <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                            </ul>
+                            </template>
+                            </p-fileUpload>
+                        <ul *ngIf="fileuploadarr.length">
+                        <li *ngFor="let file1 of fileuploadarr">{{file1.fileName}}</li>
+                        </ul>
+
+                    </div>
+                </div>
+
+                    </div>
+
+                            <div class="ui-grid-row" style="width:100%;"> <div class="ui-g form-group" style="width:80%;">
+                                <div class="ui-g-12 ui-md-4" style="width:100%;float:left;">
+                            <div style="width:50%"><button pButton  (click)="onSubmit()" label="Submit" [disabled]="!userform.valid"></button><br/></div>  
+                            <div style="width:50%;float:right;">
+                                <button pButton  (click)="clear()" label="Clear" ></button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+<p-dataTable [value]="popularservicehomepages" selectionMode="single" [rows]="10" [paginator]="true" (onRowSelect)="onRowSelectPopularServices($event)"
+    [(selection)]="selectedPopularServicesRow">
+    <p-column field="popularservice_title" [filter]="true" filterPlaceholder="Title" header="Title"></p-column>
+    
+</p-dataTable>

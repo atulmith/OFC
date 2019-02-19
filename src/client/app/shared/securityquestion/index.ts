@@ -1,0 +1,1 @@
+export * from './securityquestion.service';

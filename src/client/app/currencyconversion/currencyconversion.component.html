@@ -1,0 +1,55 @@
+<p-growl [value]="msgs"></p-growl>
+<h1>Currency Conversion</h1><br/>
+<form [formGroup]="userform">
+    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px;width:80%;">
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><input pInputText type='text' [(ngModel)]='currencyconversion.currconversion_name' formControlName='currconversion_name' /> <label>Currency Conversion Name</label></span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['currconversion_name'].valid&&userform.controls['currconversion_name'].touched">Currency Conversion Required</div>
+            </div>
+        </div>
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><p-spinner [min]="0" [step]="0.25" [(ngModel)]='currencyconversion.currconversion_rate' formControlName='currconversion_rate' ></p-spinner> <label>Currency Conversion Rate</label></span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['currconversion_rate'].valid&&userform.controls['currconversion_rate'].touched">Currency Conversion Required</div>
+            </div>
+        </div>
+
+          <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><p-dropdown [options]="drpCurrencyId" [(ngModel)]="currencyconversion.currency_id" formControlName="currency_id"></p-dropdown> </span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['currency_id'].valid&&userform.controls['currency_id'].touched">Currency Required</div>
+            </div>
+        </div>
+
+         <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><p-dropdown [options]="drpCurrencyIdTo" [(ngModel)]="currencyconversion.currency_id_to" formControlName="currency_id_to"></p-dropdown> </span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['currency_id_to'].valid&&userform.controls['currency_id_to'].touched">Currency Required</div>
+            </div>
+        </div>
+
+
+        <div class="ui-grid-row" style="width:100%;">
+            <div class="ui-g form-group" style="width:80%;">
+                <div class="ui-g-12 ui-md-4" style="width:100%;float:left;">
+                    <div style="width:50%"><button pButton (click)="onSubmit()" label="Submit" [disabled]="!userform.valid"></button><br/></div>
+                    <div style="width:50%;float:right;"><button pButton (click)="clear()" label="Clear"></button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<p-dataTable [value]="currencyconversions" selectionMode="single" [rows]="10" [paginator]="true" (onRowSelect)="onRowSelect($event)"
+        [(selection)]="selectedCurrencyconversionsRow">
+        <p-column field="currconversion_name" [filter]="true" filterPlaceholder="Name" header="Name"></p-column>
+        <p-column field="currconversion_rate" [filter]="true" filterPlaceholder="Rate" header="Rate"></p-column>
+         </p-dataTable>

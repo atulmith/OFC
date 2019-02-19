@@ -1,0 +1,56 @@
+<p-growl [value]="msgs"></p-growl>
+<h1>City</h1><br/>
+<form [formGroup]="userform">
+    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px;width:80%;">
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><input pInputText type='text' [(ngModel)]='city.city_name' formControlName='city_name' /> <label>City name</label></span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['city_name'].valid&&userform.controls['city_name'].touched">City Required</div>
+            </div>
+        </div>
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><input pInputText type='text' [(ngModel)]='city.city_aliasname' formControlName='city_aliasname' /> <label>Alias name</label></span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['city_aliasname'].valid&&userform.controls['city_aliasname'].touched">City Required</div>
+            </div>
+        </div>
+
+         <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><p-dropdown [options]="drpCountryId" [(ngModel)]="ngModelcountryId" formControlName="country_id"  (onChange)="populateStates($event)" ></p-dropdown> </span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['country_id'].valid&&userform.controls['country_id'].touched">country Required</div>
+            </div>
+        </div>
+
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><p-dropdown [options]="drpStateId" [(ngModel)]="city.state_id" formControlName="state_id"></p-dropdown> </span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['state_id'].valid&&userform.controls['state_id'].touched">State Required</div>
+            </div>
+        </div>
+        <div class="ui-grid-row" style="width:100%;">
+            <div class="ui-g form-group" style="width:80%;">
+                <div class="ui-g-12 ui-md-4" style="width:100%;float:left;">
+                    <div style="width:50%"><button pButton (click)="onSubmit()" label="Submit" [disabled]="!userform.valid"></button><br/></div>
+                    <div style="width:50%;float:right;"><button pButton (click)="clear()" label="Clear"></button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+    <p-dataTable [value]="citys" selectionMode="single" [rows]="10" [paginator]="true" (onRowSelect)="onRowSelect($event)"
+        [(selection)]="selectedcitysRow">
+        <p-column field="country_name" [filter]="true" filterPlaceholder="Country" header="Country"></p-column>
+        <p-column field="state_name" [filter]="true" filterPlaceholder="State" header="State"></p-column>
+        <p-column field="city_name" [filter]="true" filterPlaceholder="City" header="City"></p-column>
+        <p-column field="city_aliasname" [filter]="true" filterPlaceholder="Alias Name" header="Alias Name"></p-column>
+         </p-dataTable>
+

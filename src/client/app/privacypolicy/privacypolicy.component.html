@@ -1,0 +1,72 @@
+<p-growl [value]="msgs"></p-growl>
+    <h1>Create projects</h1><br/>
+    <form [formGroup]="userform" >
+        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px;width:80%;">
+            <div class='ui-grid-row' style='width:100%;'>
+                <div class='ui-g form-group' style='width:80%;'>
+                    <div class='ui-g-12 ui-md-4' style='width:100%;'>
+                        <span class='md-inputfield'>
+                            <input pInputText type='text' [(ngModel)]='privacypolicy.privacypolicy_title' formControlName='privacypolicy_title' /> 
+                            <label>Privacy title name</label>
+                            </span>
+                            </div>
+                            </div>
+                            <div class="ui-grid-col-4">   
+                                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['privacypolicy_title'].valid&&userform.controls['privacypolicy_title'].touched">Privacy title  Required
+                                    </div>
+                                    </div>
+                                    </div>
+                                    <div class='ui-grid-row' style='width:170%;'>
+                                     <div class='ui-g form-group' style='width:100%;'>
+                                         <div class='ui-g-12 ui-md-4' style='width:100%;'>
+                                             
+                                                <span class='md-inputfield' style='width:100%;'>
+                                                    <label>Privacy Description name</label><br>
+                                                    <p-editor [(ngModel)]="privacypolicy.privacypolicy_description" [style]="{'height':'320px'}" formControlName='privacypolicy_description'></p-editor>
+                                                    
+                                                    </span>
+                                                    </div>
+                            </div>
+                                                   
+                                                    <div class="ui-grid-col-4">   
+                                                        <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['privacypolicy_description'].valid&&userform.controls['privacypolicy_description'].touched">Privacy Description  Required
+                                                            </div>
+                                                            </div>
+                                    </div>
+                                                            <div class="ui-grid-row" style="width:100%;"> 
+                                                                <div class="ui-g form-group" style="width:80%;">
+                                                                    <div class="ui-g-12 ui-md-4" style="width:100%;float:left;">
+                                                                        <div style="width:50%">
+                                                                            <button pButton  (click)="onSubmit()" label="Submit" [disabled]="!userform.valid"></button><br/>
+                                                                            </div>  
+                                                                            <div style="width:50%;float:right;">
+                                                                                <button pButton  (click)="clear()" label="Clear" ></button>
+                                                                                </div>
+                                                                                </div>
+                                                                                </div>
+                                                                                </div>
+                                                                                </div>
+                                                                                </form>
+
+<p-dataTable [value]="privacypolicys" selectionMode="single" [rows]="10" [paginator]="true" (onRowSelect)="onRowSelectPrivacyPolicy($event)" [(selection)]="selectedPrivacyPolicyRow">
+    <p-column field="privacypolicy_title" [filter]="true" filterPlaceholder="Title"  header="Title"></p-column>
+    <!--<p-column field="privacypolicy_description" [filter]="true" filterPlaceholder="Description" header="Description"></p-column>-->
+</p-dataTable>
+
+
+
+
+    
+<!--<p-fileUpload name="files" url="http://localhost:8081/Atultest/rest/atultest/files2" (onBeforeUpload)="onBeforeUpload($event)" (onUpload)="onUpload($event)" 
+        multiple="multiple" accept="image/*" maxFileSize="1000000">
+    <template pTemplate type="content">
+        <ul *ngIf="uploadedFiles.length">
+            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+        </ul>
+    </template>        
+</p-fileUpload> -->
+
+<!--<p-fileUpload name="uploadedFiles[]" url="http://localhost:8081/Atultest/rest/atultest/files2"></p-fileUpload>-->
+<!--<p-fileUpload name="files" url="http://localhost:8080/TaskManagerWS/rest/atultest/multiplefiles" 
+multiple="multiple" (onUpload)="onUpload($event)"></p-fileUpload>
+<button pButton type="button" (click)="onFinalFileUpload()" label="Final Submit"></button>-->

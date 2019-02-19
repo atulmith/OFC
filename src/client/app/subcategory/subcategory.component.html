@@ -1,0 +1,143 @@
+<p-growl [value]="msgs"></p-growl>
+<h1>Sub Category</h1><br/>
+<form [formGroup]="userform">
+    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px;width:80%;">
+
+
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><input pInputText type='text' [(ngModel)]='subcategory.subcat_name' formControlName='subcat_name' /> <label>Sub Category</label></span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['subcat_name'].valid&&userform.controls['subcat_name'].touched">Sub Category Required</div>
+            </div>
+        </div>
+
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><input pInputText type='text' [(ngModel)]='subcategory.subcat_aliasname' formControlName='subcat_aliasname' /> <label>Alias Name</label></span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['subcat_aliasname'].valid&&userform.controls['subcat_aliasname'].touched">Sub Category Alias Name Required</div>
+            </div>
+        </div>
+
+
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><p-dropdown [options]="drpMainCatId" [(ngModel)]="subcategory.maincat_id" formControlName="maincat_id"></p-dropdown> </span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['maincat_id'].valid&&userform.controls['maincat_id'].touched">Main Category Required</div>
+            </div>
+        </div>
+
+
+        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px;width:80%;">
+            <label>keyword Details</label>
+
+            <!--as done on 7 feb 2017 by Mandar removed  formGroupName="keyword_subgroup"-->
+            <div formGroupName="keyword_subgroup">
+                <div class='ui-grid-row' style='width:100%;'>
+                    <div class='ui-g form-group' style='width:80%;'>
+                        <div class='ui-g-12 ui-md-4' style='width:100%;'>
+                            <span class='md-inputfield'>
+                                <!--as done on 7 feb 2017 by Mandar removed  formControlName="keysubcat_name2"-->
+            <input pInputText type='text' formControlName="keysubcat_name2" [(ngModel)]="keywordSubcat.keysubcat_name">
+            <label>Name</label>
+            </span>
+                        </div>
+                    </div>
+                    <div class="ui-grid-col-4">
+                        <!--<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formGroupName.keysubcat_name.valid&&formGroupName.keysubcat_name.touched">Name Required</div>-->
+                    </div>
+                </div>
+
+
+
+                <div class='ui-grid-row' style='width:100%;'>
+                    <div class='ui-g form-group' style='width:80%;'>
+                        <div class='ui-g-12 ui-md-4' style='width:100%;'>
+                            <span class='md-inputfield'>
+                                <!--as done on 7 feb 2017 by Mandar removed formControlName="keysubcat_searchtext" -->
+            <input pInputText type='text' formControlName="keysubcat_searchtext"  [(ngModel)]="keywordSubcat.keysubcat_searchtext">
+            <label>Search Text</label>
+            </span>
+                        </div>
+                    </div>
+                    <div class="ui-grid-col-4">
+                        <!--<div class="ui-message ui-messages-error ui-corner-all" *ngIf="!formGroupName.keysubcat_searchtext.valid&&formGroupName.keysubcat_searchtext.touched">Search Text Required</div>-->
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="ui-grid-row" style="width:100%;">
+                <div class="ui-g form-group" style="width:80%;">
+
+                    <div class="ui-g-12 ui-md-4" style="width:100%;float:left;">
+                        <div style="width:50%"><button pButton (click)="onSubmitkeyword()" label="Add"></button><br/></div>
+                    </div>
+                </div>
+            </div>
+            <p-dataTable [value]="keywordGrid" selectionMode="single" [rows]="10" [paginator]="true" (onRowSelect)="onKeywordSubcatRowSelected($event)"
+                [(selection)]="selectedkeywordgridRow">
+
+
+                <p-column field="keysubcat_name" [filter]="true" filterPlaceholder="Name" header="Name"></p-column>
+                <p-column field="keysubcat_searchtext" [filter]="true" filterPlaceholder="Search Text" header="Search Text"></p-column>
+                 <p-column styleClass="col-button" header="Delete">
+                      <template let-col let-cont="rowData" pTemplate="body">
+                        <span [style.color]="cont[col.field]">{{cont[col.field]}}</span>
+                     </template>
+                    <template pTemplate="header">
+                            <button type="button" pButton icon="fa-refresh"></button>
+                    </template>
+                    <template let-cont="rowData" pTemplate="body">
+                            <button type="button" pButton (click)="deleteKeywordRow(cont)"  icon="fa-close" label="Delete"></button>
+                    </template>
+                </p-column>
+            </p-dataTable>
+        </div>
+
+        <div class="ui-grid-row" style="width:100%;">
+            <div class="ui-g form-group" style="width:80%;">
+                <div class="ui-g-12 ui-md-4" style="width:100%;float:left;">
+                    <div style="width:50%"><button pButton (click)="onSubmit()" label="Submit" ></button><br/></div>
+                    <div style="width:50%;float:right;"><button pButton (click)="clear()" label="Clear"></button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<p-dataTable [value]="subcategoryGrid" selectionMode="single" [rows]="10" [paginator]="true" (onRowSelect)="onSubcategoryRowSelected($event)"
+    [(selection)]="selectedSubcategoryRow">
+    <p-column field="subcat_name" [filter]="true" filterPlaceholder="Name" header="Name"></p-column>
+    <p-column field="subcat_aliasname" [filter]="true" filterPlaceholder="Alias Name" header="Alias Name"></p-column>
+
+</p-dataTable>
+
+
+<p-dialog header="Do You want to Delete?" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true">
+    <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="keywordSubcat">
+ <!--       <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="keysubcat_name">Name</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="keysubcat_name" [(ngModel)]="keywordSubcat.keysubcat_name" /></div>
+        </div>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-4"><label for="keysubcat_searchtext">Search Text</label></div>
+            <div class="ui-grid-col-8"><input pInputText id="keysubcat_searchtext" [(ngModel)]="keywordSubcat.keysubcat_searchtext" /></div>
+        </div>-->
+      <!--  <div class="ui-grid-row">
+             <div class="ui-grid-col-8"><label >Do You want to Delete?</label></div></div>-->
+        <div class="ui-grid-row">
+           
+            <div class="ui-grid-col-8"><button type="button" pButton icon="fa-close" (click)="delete()" label="Yes"></button></div>
+            <div class="ui-grid-col-8"><button type="button" pButton icon="fa-close" (click)="cancelDelete()" label="No"></button></div>
+            
+        </div>
+    </div>
+
+</p-dialog>

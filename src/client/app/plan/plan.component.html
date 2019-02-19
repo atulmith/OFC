@@ -1,0 +1,56 @@
+<p-growl [value]="msgs"></p-growl>
+<h1>Plan</h1><br/>
+<form [formGroup]="userform">
+    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px;width:80%;">
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><input pInputText type='text' [(ngModel)]='plan.plan_name' formControlName='plan_name' /> <label>Plan  Name</label></span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['plan_name'].valid&&userform.controls['plan_name'].touched">Plan Name Required</div>
+            </div>
+        </div>
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><p-spinner [min]="0" [step]="1" [(ngModel)]='plan.plan_bidsnos' formControlName='plan_bidsnos'></p-spinner> <label>Bid Nos.</label></span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['plan_bidsnos'].valid&&userform.controls['plan_bidsnos'].touched">Plan Bid Nos. Required</div>
+            </div>
+        </div>
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><p-spinner [min]="0" [step]="0.25" [(ngModel)]='plan.plan_feespercentage' formControlName='plan_feespercentage'></p-spinner> <label>Plan Fees %</label></span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['plan_feespercentage'].valid&&userform.controls['plan_feespercentage'].touched">Plan Fees % Required</div>
+            </div>
+        </div>
+        <div class='ui-grid-row' style='width:100%;'>
+            <div class='ui-g form-group' style='width:80%;'>
+                <div class='ui-g-12 ui-md-4' style='width:100%;'><span class='md-inputfield'><p-spinner [min]="0" [step]="1" [(ngModel)]='plan.plan_nosofcategories' formControlName='plan_nosofcategories' ></p-spinner> <label>Plan Browse Nos of categories</label></span></div>
+            </div>
+            <div class="ui-grid-col-4">
+                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['plan_nosofcategories'].valid&&userform.controls['plan_nosofcategories'].touched">Plan Browse Nos of categories Required</div>
+            </div>
+        </div>
+        <div class="ui-grid-row" style="width:100%;">
+            <div class="ui-g form-group" style="width:80%;">
+                <div class="ui-g-12 ui-md-4" style="width:100%;float:left;">
+                    <div style="width:50%"><button pButton (click)="onSubmit()" label="Submit" [disabled]="!userform.valid"></button><br/></div>
+                    <div style="width:50%;float:right;"><button pButton (click)="clear()" label="Clear"></button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+<p-dataTable [value]="plangrid" selectionMode="single" [rows]="10" [paginator]="true" (onRowSelect)="onRowSelect($event)"
+    [(selection)]="selectedPlansRow">
+    <p-column field="plan_name" [filter]="true" filterPlaceholder="Name" header="Name"></p-column>
+    <p-column field="plan_bidsnos" [filter]="true" filterPlaceholder="Bid Nos." header="Bid Nos."></p-column>
+    <p-column field="plan_feespercentage" [filter]="true" filterPlaceholder="Fees %" header="Fees %"></p-column>
+    <p-column field="plan_nosofcategories" [filter]="true" filterPlaceholder="Browse Nos of categories" header="Browse Nos of categories"></p-column>
+</p-dataTable>

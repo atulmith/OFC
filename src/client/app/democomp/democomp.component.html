@@ -1,0 +1,158 @@
+
+
+
+<!--<div class="ui-g">-->
+    <p-growl [value]="msgs"></p-growl>
+    <h1>Test Form</h1><br/>
+    <!--<div class="ui-g-12">
+        <div class="card">
+            <h1>Empty Page</h1>
+            <p>Use this page to start from scratch and place your custom content.</p>-->
+            <!--<button pButton type="text" icon="ac-unit" (click)="count()" label="Click"></button>
+            <button type="button" pButton label="add-shopping-cart" icon="ui-icon-add-shopping-cart">Hi</button>    -->
+                <!--<input pInputText type="text" placeholder="Required"/>-->
+            <form [formGroup]="userform" >
+                <!--<p-panel header="Validate">-->
+                     <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px;width:80%;">
+                        <div class="ui-grid-row" style="width:100%;">
+                            
+                            <div class="ui-g form-group" style="width:80%;">
+                                <div class="ui-g-12 ui-md-4" style="width:100%;">
+                                <span class="md-inputfield">
+                                    <input pInputText type="text" [(ngModel)]="testone.testone_name" formControlName="name" />
+                                    <label>Name</label>
+                                </span>
+                                </div>
+                            </div>
+                            <div class="ui-grid-col-4">
+                                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['name'].valid&&userform.controls['name'].dirty">
+                                    
+                                    Name is required
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ui-grid-row" style="width:100%;">
+                            <div class="ui-g form-group" style="width:80%;">
+                                <div class="ui-g-12 ui-md-4" style="width:100%;">
+                                <span class="md-inputfield">
+                                    <input pInputText type="text" [(ngModel)]="testone.testone_state" formControlName="state" />
+                                    <label>State</label>
+                                </span>
+                                </div>
+                            </div>
+                            <div class="ui-grid-col-4">
+                                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['state'].valid&&userform.controls['state'].dirty">
+                                    
+                                    State is required
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ui-grid-row" style="width:100%;">
+                            <div class="ui-g form-group" style="width:80%;">
+                                <div class="ui-g-12 ui-md-4" style="width:100%;">
+                                <span class="md-inputfield">
+                                    <input pInputText type="text" [(ngModel)]="testone.testone_city" formControlName="city" />
+                                    <label>City</label>
+                                </span>
+                                </div>
+                            </div>
+                            <div class="ui-grid-col-4">
+                                <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['city'].valid&&userform.controls['city'].dirty">
+                                    
+                                    City is required
+                                </div>
+                            </div>
+                        </div>
+                    <!--<div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">-->
+                        <!--<div class="ui-grid-row">
+                            <div class="ui-grid-col-2">
+                                First Name *:
+                            </div>
+                            <div class="ui-grid-col-6">
+                                <input pInputText type="text" [(ngModel)]="testone.testone_name"  formControlName="firstname" placeholder="Required"/>
+                                <!--<input pInputText type="text" formControlName="firstname" placeholder="Required"/>-->
+                            <!--</div>
+                            <div class="ui-grid-col-4">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['firstname'].valid&&userform.controls['firstname'].dirty">
+                                <i class="fa fa-close"></i>
+                                    Firstname is required
+                            </div>
+                            </div>
+                        </div>-->
+                        <!--<div class="ui-grid-row">
+                            <div class="ui-grid-col-2">
+                                City Name *:
+                            </div>
+                            <div class="ui-grid-col-6">
+                                <input pInputText type="text" [(ngModel)]="testone.testone_city" formControlName="cityname" placeholder="Required"/>
+                            </div>
+                            <div class="ui-grid-col-4">
+                            <div class="ui-message ui-messages-error ui-corner-all" *ngIf="!userform.controls['cityname'].valid&&userform.controls['cityname'].dirty">
+                                <i class="fa fa-close"></i>
+                                    Cityname is required
+                            </div>
+                            </div>
+                        </div>-->
+                        <!--<div class="ui-grid-row">
+                            <div class="ui-grid-col-2"></div>
+                            <div class="ui-grid-col-6">
+                                <button pButton type="submit" label="Submit" [disabled]="!userform.valid"></button>
+                            </div>
+                            <div class="ui-grid-col-4"></div>
+                        </div>
+                        
+                    </div>-->
+                    <button pButton  (click)="onSubmit()" label="Submit" [disabled]="!userform.valid"></button><br/>
+                    <button pButton  (click)="clear()" label="Clear" ></button>
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-2"></div>
+                            <div class="ui-grid-col-6">
+                                <!--<button pButton (click)="onSubmit()" label="Submit" [disabled]="!userform.valid"></button>-->
+                            </div>
+                            <div class="ui-grid-col-4"></div>
+                        </div>
+                        <div style="text-align:center;margin-top:20px" *ngIf="submitted">
+                            Form Submitted
+                            <br>
+                            {{diagnostic}}
+                        </div>
+                    </div>
+                <!--</p-panel>-->
+            </form>
+        <!--</div>
+    </div>
+</div>-->
+
+<p-dataTable [value]="testones" selectionMode="single" [rows]="10" [paginator]="true" (onRowSelect)="onRowSelect($event)" [(selection)]="selectedRow">
+    <p-column field="testone_name" [filter]="true" filterPlaceholder="Search Name"  header="Name"></p-column>
+    <p-column field="testone_state" [filter]="true" filterPlaceholder="Search State" header="State"></p-column>
+    <p-column field="testone_city" [filter]="true" filterPlaceholder="Search City" header="City"></p-column>
+</p-dataTable>
+
+<div class="ui-g">
+     
+    <div class="ui-g-12 ui-md-4">
+        <h3>Spanish</h3>
+        <p-calendar [(ngModel)]="date2"   > </p-calendar>
+        <p-calendar [(ngModel)]="stringdate2" dataType="string"    > </p-calendar>
+    </div>
+</div>
+
+
+
+    
+<!--<p-fileUpload name="files" url="http://localhost:8081/Atultest/rest/atultest/files2" (onBeforeUpload)="onBeforeUpload($event)" (onUpload)="onUpload($event)" 
+        multiple="multiple" accept="image/*" maxFileSize="1000000">
+    <template pTemplate type="content">
+        <ul *ngIf="uploadedFiles.length">
+            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+        </ul>
+    </template>        
+</p-fileUpload> -->
+
+<!--<p-fileUpload name="uploadedFiles[]" url="http://localhost:8081/Atultest/rest/atultest/files2"></p-fileUpload>-->
+<p-fileUpload name="files" url="http://localhost:8080/TaskManagerWS/rest/atultest/multiplefiles" 
+multiple="multiple" (onUpload)="onUpload($event)"></p-fileUpload>
+<button pButton type="button" (click)="onFinalFileUpload()" label="Final Submit"></button>
